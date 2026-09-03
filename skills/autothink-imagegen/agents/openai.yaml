@@ -1,0 +1,4 @@
+interface:
+  display_name: "AutoThink Imagegen"
+  short_description: "Generate and edit PNGs through AutoThink"
+  default_prompt: "Use AutoThink image generation for this request."
