@@ -7,6 +7,15 @@ import { assertMockHealthy, makeFixture, runCommand, skillRoot } from "./test-he
 
 const pythonCli = path.join(skillRoot, "scripts", "imagegen.py");
 
+test("Python fallback allows five minutes for generation", async () => {
+  const result = await runCommand("python3", [
+    "-c",
+    `import runpy; print(runpy.run_path(${JSON.stringify(pythonCli)})["REQUEST_TIMEOUT_SECONDS"])`
+  ]);
+  assert.equal(result.code, 0, result.stderr);
+  assert.equal(result.stdout.trim(), "300");
+});
+
 test("python fallback sends a generation request and saves the PNG", async () => {
   const server = await createMockImageServer(async ({ request, json, png }) => {
     assert.equal(request.method, "POST");

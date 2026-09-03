@@ -3,15 +3,19 @@ import { test } from "node:test";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { parseArgs } from "../skills/autothink-imagegen/scripts/imagegen-core.mjs";
+import * as imagegenCore from "../skills/autothink-imagegen/scripts/imagegen-core.mjs";
 import { createMockImageServer, PNG_BYTES } from "./mock-image-api.mjs";
 import { assertMockHealthy, makeFixture, readBytes, runCommand, skillRoot } from "./test-helpers.mjs";
 
 const nodeCli = path.join(skillRoot, "scripts", "imagegen.mjs");
 const batchCli = path.join(skillRoot, "scripts", "imagegen-batch.mjs");
 
+test("Node image requests allow five minutes for generation", () => {
+  assert.equal(imagegenCore.REQUEST_TIMEOUT_MS, 300_000);
+});
+
 test("parseArgs preserves the prompt and separates image inputs", () => {
-  assert.deepEqual(parseArgs([
+  assert.deepEqual(imagegenCore.parseArgs([
     "--prompt", " draw a tree ",
     "--image", "/tmp/source.png",
     "--mask", "/tmp/mask.png",

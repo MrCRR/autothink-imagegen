@@ -33,6 +33,8 @@ node "<SKILL_DIR>/scripts/imagegen-batch.mjs" --prompt "<prompt 1>" --prompt "<p
 
 Use `--out` when the user gives an output location. A path with an extension is a file stem; a path without one is an output directory. The client creates PNGs with exclusive creation and adds a numeric suffix instead of overwriting an existing file.
 
+A single upstream generation or image-download request may wait up to five minutes before timing out. Do not retry automatically after a timeout.
+
 Use `python3 "<SKILL_DIR>/scripts/imagegen.py"` with the same single-image arguments only when the Node runtime is unavailable. Do not retry failed image requests or silently switch to another provider. Batch generation is limited to 2-5 prompts and at most three concurrent child processes.
 
 ## Configuration

@@ -12,7 +12,7 @@ const DEFAULT_MODEL = "gpt-image-2";
 const MAX_RESPONSE_BYTES = 64 * 1024 * 1024;
 const MAX_INPUT_BYTES = 64 * 1024 * 1024;
 const MAX_REDIRECTS = 5;
-const REQUEST_TIMEOUT_MS = 60_000;
+export const REQUEST_TIMEOUT_MS = 300_000;
 const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 const DEFAULT_SKILL_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
