@@ -105,7 +105,7 @@ def generate_image(config, prompt, images=None, mask=None, out=None, cwd=None):
         "model": config["model"],
         "prompt": prompt,
         "quality": "auto",
-        "size": "auto",
+        "size": "1024x1024",
         "background": "auto",
         "output_format": "png",
     }

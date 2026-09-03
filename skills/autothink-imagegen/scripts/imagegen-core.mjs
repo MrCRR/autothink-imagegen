@@ -118,7 +118,7 @@ export async function generateImage({ config, prompt, images = [], mask = null, 
     model: config.model || DEFAULT_MODEL,
     prompt,
     quality: "auto",
-    size: "auto",
+    size: "1024x1024",
     background: "auto",
     output_format: "png"
   };

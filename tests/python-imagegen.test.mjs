@@ -22,6 +22,7 @@ test("python fallback sends a generation request and saves the PNG", async () =>
     assert.equal(new URL(request.url, server.origin).pathname, "/v1/images/generations");
     const payload = JSON.parse(request.body);
     assert.equal(payload.prompt, "python prompt");
+    assert.equal(payload.size, "1024x1024");
     json({ data: [{ b64_json: png.toString("base64") }] });
   });
   const fixture = await makeFixture(server.baseUrl);

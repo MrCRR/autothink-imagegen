@@ -38,7 +38,7 @@ test("generation sends the exact prompt and saves a base64 PNG", async () => {
       model: "gpt-image-2",
       prompt: " draw a tree ",
       quality: "auto",
-      size: "auto",
+      size: "1024x1024",
       background: "auto",
       output_format: "png"
     });

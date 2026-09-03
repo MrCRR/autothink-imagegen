@@ -52,7 +52,7 @@ The template uses:
 }
 ```
 
-The clients call `images/generations` for text-to-image and `images/edits` for edits, request `output_format: "png"`, validate the PNG signature, and accept either `b64_json` or an HTTP(S) result URL. Result downloads follow at most five redirects and never reuse the API bearer header.
+The clients call `images/generations` for text-to-image and `images/edits` for edits, request a square `1024x1024` PNG with `output_format: "png"`, validate the PNG signature, and accept either `b64_json` or an HTTP(S) result URL. Result downloads follow at most five redirects and never reuse the API bearer header.
 
 ## Return Results Safely
 
