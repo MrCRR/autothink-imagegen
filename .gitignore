@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+coverage/
+*.log
+.codex/task-states/
+.worktrees/
+skills/autothink-imagegen/config.json
+skills/autothink-imagegen/output/
