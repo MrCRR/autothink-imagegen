@@ -91,7 +91,7 @@ test("result URLs follow one redirect and do not reuse the API bearer header", a
   const server = await createMockImageServer(async ({ request, json, redirect, bytes, origin }) => {
     const pathname = new URL(request.url, origin).pathname;
     if (pathname === "/v1/images/generations") {
-      json({ data: [{ url: `${origin}/redirect` }] });
+      json({ data: [{ url: `${origin}/redirect?signature=mock-signature&expires=9999999999` }] });
     } else if (pathname === "/redirect") {
       assert.equal(request.headers.authorization, undefined);
       redirect(`${origin}/image.png`);

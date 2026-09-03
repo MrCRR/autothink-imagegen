@@ -226,7 +226,7 @@ def decode_image_response(raw_body, config):
             buffers.append(validate_png(decode_base64(item["b64_json"])))
         elif isinstance(item, dict) and isinstance(item.get("url"), str):
             status, _, body = request_bytes(
-                validate_http_url(item["url"], "image URL"),
+                validate_http_url(item["url"], "image URL", allow_query=True),
                 headers={"Accept": "image/png"},
                 proxy=config["proxy"],
             )
@@ -347,11 +347,11 @@ def sanitize_error(error, secret=""):
     return message[:600]
 
 
-def validate_http_url(value, label):
+def validate_http_url(value, label, allow_query=False):
     parsed = urllib.parse.urlparse(str(value))
     if parsed.scheme not in ("http", "https") or not parsed.netloc:
         raise ClientError(f"{label} must be a valid HTTP(S) URL")
-    if parsed.username or parsed.password or parsed.query or parsed.fragment:
+    if parsed.username or parsed.password or (parsed.query and not allow_query) or parsed.fragment:
         raise ClientError(f"{label} must not include credentials or query parameters")
     return urllib.parse.urlunparse(parsed)
 

@@ -236,7 +236,7 @@ async function decodeImageResponse(rawBody, config) {
 async function downloadImage(urlValue, config) {
   let current = urlValue;
   for (let redirectCount = 0; ; redirectCount += 1) {
-    const parsed = validateHttpUrl(current, "image URL");
+    const parsed = validateHttpUrl(current, "image URL", { allowQuery: true });
     const response = await requestBuffer(parsed, {
       method: "GET",
       proxy: config.proxy,
@@ -355,7 +355,7 @@ function isPlaceholderKey(value) {
     normalized.startsWith("<") || normalized.includes("填写") || normalized.includes("placeholder");
 }
 
-function validateHttpUrl(value, label) {
+function validateHttpUrl(value, label, { allowQuery = false } = {}) {
   let parsed;
   try {
     parsed = new URL(String(value));
@@ -365,7 +365,7 @@ function validateHttpUrl(value, label) {
   if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
     throw new ClientError(`${label} must use HTTP or HTTPS`);
   }
-  if (parsed.username || parsed.password || parsed.search || parsed.hash) {
+  if (parsed.username || parsed.password || (!allowQuery && parsed.search) || parsed.hash) {
     throw new ClientError(`${label} must not include credentials or query parameters`);
   }
   return parsed.toString().replace(/\/+$/, "");
