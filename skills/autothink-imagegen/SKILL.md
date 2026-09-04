@@ -5,6 +5,22 @@ description: Use when a user asks Codex to generate, edit, remix, or locally sav
 
 # AutoThink Imagegen
 
+## Install
+
+In a Codex session, install globally with the short form:
+
+```bash
+npx skills add -g MrCRR/autothink-imagegen
+```
+
+This repository exposes one skill. The `skills` CLI detects the current Codex session, selects the only skill, skips confirmation prompts, and installs it to the global `.agents/skills` directory. Do not add `--agent codex`, `--skill autothink-imagegen`, `--copy`, or the CLI `-y` flag. Add `npx --yes` only for unattended shells where `npx` itself must approve installing the CLI package.
+
+When running outside a detected Codex session, use explicit installer options:
+
+```bash
+npx --yes skills add -g MrCRR/autothink-imagegen --agent codex --skill autothink-imagegen --copy -y
+```
+
 ## Overview
 
 Use the bundled clients to turn an explicit image request into a PNG result through the user's local AutoThink configuration. Keep the user's prompt unchanged, preserve source-image intent, and report the saved result without exposing credentials or raw API output.
@@ -39,7 +55,7 @@ Use `python3 "<SKILL_DIR>/scripts/imagegen.py"` with the same single-image argum
 
 ## Configuration
 
-The client reads `<SKILL_DIR>/config.json` by default, or the path in `AUTOTHINK_IMAGEGEN_CONFIG`. If configuration is missing or still contains a placeholder key, stop with the configuration guidance and tell the user to copy `config.example.json` locally and fill it in there. Never ask the user to paste an API key into the conversation, and never print the config file.
+The client reads `<SKILL_DIR>/config.json` by default, or the path in `AUTOTHINK_IMAGEGEN_CONFIG`. If configuration is missing or still contains a placeholder key, stop with the configuration guidance and tell the user to copy `config.example.json` locally and fill in the API key there. The API key must remain local; it cannot safely be a repository default. Never ask the user to paste an API key into the conversation, and never print the config file.
 
 The template uses:
 
