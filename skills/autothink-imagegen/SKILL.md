@@ -62,7 +62,7 @@ The template uses:
 ```json
 {
   "api_key": "replace-with-your-autothink-image-key",
-  "base_url": "https://api.autothink.space/v1",
+  "base_url": "https://ai.autothink.space/v1",
   "model": "gpt-image-2",
   "proxy": ""
 }

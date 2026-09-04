@@ -10,7 +10,7 @@
 
 ## Global Constraints
 
-- 默认网关为 `https://api.autothink.space/v1`，默认模型为 `gpt-image-2`。
+- 默认网关为 `https://ai.autothink.space/v1`，默认模型为 `gpt-image-2`。
 - 生成接口为 `POST /images/generations`，编辑接口为 `POST /images/edits`；编辑参考图字段重复使用 `image[]`，遮罩字段为 `mask`。
 - 所有成功结果请求 `output_format: "png"` 并验证 PNG 签名。
 - 不保存或打印真实 API key；配置文件只从本地 `config.json` 或 `AUTOTHINK_IMAGEGEN_CONFIG` 指定路径读取。
