@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<style>
+  #subs-root { position: absolute; inset: 0; overflow: visible; }
+  /* 字幕：一行、底部居中、硬切。白字黑描边（深色画面）/ 黑字纸色描边（白板画面） */
+  #subs-root .sub-group { position: absolute; left: 0; right: 0; bottom: 96px; text-align: center;
+    font-family: var(--font-cn); font-size: 46px; font-weight: 700; color: #FFFFFF;
+    paint-order: stroke fill; -webkit-text-stroke: 5px rgba(0,0,0,.86);
+    letter-spacing: .01em; line-height: 1.24; }
+  #subs-root .sub-group.dark { color: #232323; -webkit-text-stroke: 5px rgba(247,245,239,.94); }
+</style>
+<div id="subs-root" data-composition-id="subs" data-width="1920" data-height="1080">
+  <div id="subs-01" class="sub-group clip" data-start="0.3" data-duration="3.300">这期聊聊市盈率PE，这个最常被用错的指标。</div>
+  <div id="subs-02" class="sub-group clip" data-start="4.2" data-duration="2.800">PE低，就是便宜吗？</div>
+  <div id="subs-03" class="sub-group clip" data-start="7" data-duration="3.500">不一定。三个陷阱，能把贵的包装成便宜的。</div>
+  <div id="subs-04" class="sub-group clip" data-start="11.3" data-duration="2.300">第一个，叫分母陷阱。</div>
+  <div id="subs-05" class="sub-group clip" data-start="14.2" data-duration="3.300">PE等于市值除以净利润。</div>
+  <div id="subs-06" class="sub-group clip" data-start="17.5" data-duration="3.500">分母只要变小，PE立刻变高。</div>
+  <div id="subs-07" class="sub-group clip" data-start="21" data-duration="2.935">一次性收益、卖资产、会计调整，</div>
+  <div id="subs-08" class="sub-group clip" data-start="23.935" data-duration="1.565">都会让分母失真。</div>
+  <div id="subs-09" class="sub-group clip" data-start="26.3" data-duration="3.700">同样一个PE，在不同行业是完全不同的意思。</div>
+  <div id="subs-10" class="sub-group clip" data-start="30" data-duration="2.800">周期股在盈利高点时，PE天然就很低。</div>
+  <div id="subs-11" class="sub-group clip" data-start="33.3" data-duration="3.200">所以要用三步过筛：看分母、看行业、看现金流。</div>
+  <div id="subs-12" class="sub-group clip" data-start="38.3" data-duration="3.200">低PE不是理由，会算才是。</div>
+</div>
+<script>
+  // 字幕靠 clip 的 data-start/data-duration 显隐，不需要补间；这里只注册一个空时间线。
+  const tl = gsap.timeline({ paused: true });
+  window.__timelines["subs"] = tl;
+</script>
+</template>
+</body></html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<style>
+  #root { position: absolute; inset: 0; overflow: hidden;
+    background: radial-gradient(60% 70% at 50% 50%, var(--deck-hi-2) 0%, var(--deck-bg) 65%, var(--deck-bg-lo) 100%);
+    color: var(--deck-ink); font-family: var(--font-cn); }
+  .num { position: absolute; left: 120px; top: 300px; font-family: var(--font-num); font-size: 240px;
+    font-weight: 700; line-height: .9; color: var(--mt-gold); }
+  .title { position: absolute; left: 420px; top: 372px; font-size: 128px; font-weight: 900; letter-spacing: -.02em; }
+  .sub { position: absolute; left: 424px; top: 540px; font-size: 40px; font-weight: 500; color: var(--deck-mute); }
+  .line { position: absolute; left: 120px; top: 700px; width: 1680px; height: 1px; background: var(--deck-line);
+    transform-origin: 0 50%; }
+  .flash { position: absolute; inset: 0; background: #FFFFFF; pointer-events: none; }
+</style>
+<div id="root" data-composition-id="s03-section" data-duration="3" data-width="1920" data-height="1080">
+  <div class="wm" data-layout-ignore>投研笔记</div>
+  <div class="flash" id="s03-flash"></div>
+  <div class="num" id="s03-num">01</div>
+  <h2 class="title" id="s03-title">分母陷阱</h2>
+  <p class="sub" id="s03-sub">PE 的分母，是可以被"做"出来的</p>
+  <div class="line" id="s03-line"></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#s03-flash", { opacity: .35 }, { opacity: 0, duration: .18, ease: "power2.in" }, 0);
+tl.fromTo("#s03-num", { opacity: .001, x: -80 }, { opacity: 1, x: 0, duration: .4, ease: "expo.out" }, 0);
+tl.fromTo("#s03-title", { opacity: .001, x: -50 }, { opacity: 1, x: 0, duration: .36, ease: "expo.out" }, .12);
+tl.fromTo("#s03-sub", { opacity: .001 }, { opacity: 1, duration: .26 }, .3);
+tl.fromTo("#s03-line", { scaleX: 0 }, { scaleX: 1, duration: .5, ease: "power3.inOut" }, .2);
+window.__timelines["s03-section"] = tl;
+</script>
+</template>
+</body></html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<style>
+  /* ============ 美投君式：两块设计系统 ============ */
+  :root {
+    /* 深色分析幻灯片（deck） */
+    --deck-bg: #14181F;
+    --deck-bg-hi: #232B36;
+    --deck-bg-lo: #0E1116;
+    --deck-ink: #F2F4F7;
+    --deck-body: #C6CDD6;
+    --deck-mute: #8B95A3;
+    --deck-panel: rgba(255,255,255,.045);
+    --deck-line: rgba(255,255,255,.14);
+    /* 语义色：红=风险/下跌，绿=机会/上涨，金=中性强调/行动 */
+    --mt-red: #E5342A;
+    --mt-green: #35C46B;
+    --mt-gold: #F5B02E;
+    /* 白板手绘（whiteboard） */
+    --paper: #F7F5EF;
+    --paper-ink-soft: #6B6B6B;
+    --pen-body: #263140;
+    --pen-metal: #8FA0B4;
+    --pen-grip: #C8D2DC;
+    --deck-hi-2: #222A35;
+    --deck-faint: #6C7684;
+    --ink: #232323;
+    --mark-red: #D8352A;
+    --mark-green: #1F9D55;
+    --mark-blue: #2F6FD0;
+    /* 字体 */
+    --font-cn: "Noto Sans SC";
+    --font-hand: "ZCOOL KuaiLe";
+    --font-num: "Oswald";
+  }
+  @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-VF.woff2") format("woff2");
+               font-weight: 100 900; font-display: block; }
+  @font-face { font-family: "ZCOOL KuaiLe"; src: url("assets/fonts/ZCOOLKuaiLe.woff2") format("woff2");
+               font-weight: 400; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--deck-bg); }
+  #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+
+  /* 全片叠加：水印 + 字幕 */
+  .wm { position: absolute; right: 56px; top: 46px; font-family: var(--font-cn); font-size: 28px;
+        font-weight: 700; letter-spacing: .12em; color: rgba(255,255,255,.46); z-index: 90; }
+  .wm.on-paper { color: rgba(35,35,35,.42); }
+  #subs-root .sub-group { position: absolute; left: 0; right: 0; bottom: 96px; text-align: center;
+        font-family: var(--font-cn); font-size: 46px; font-weight: 700; color: #FFFFFF;
+        paint-order: stroke fill; -webkit-text-stroke: 5px rgba(0,0,0,.85);
+        letter-spacing: .01em; line-height: 1.25; z-index: 30; }
+  #subs-root .sub-group.dark { color: #232323; -webkit-text-stroke: 5px rgba(247,245,239,.92); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="43" data-width="1920" data-height="1080">
+
+  <div id="s01-host" data-composition-id="s01-title" data-composition-src="compositions/s01-title.html"
+       data-start="0" data-duration="4" data-track-index="0" data-width="1920" data-height="1080"></div>
+  <div id="s02-host" data-composition-id="s02-hook" data-composition-src="compositions/s02-hook.html"
+       data-start="4" data-duration="7" data-track-index="0" data-width="1920" data-height="1080"></div>
+  <div id="s03-host" data-composition-id="s03-section" data-composition-src="compositions/s03-section.html"
+       data-start="11" data-duration="3" data-track-index="0" data-width="1920" data-height="1080"></div>
+  <div id="s04-host" data-composition-id="s04-whiteboard" data-composition-src="compositions/s04-whiteboard.html"
+       data-start="14" data-duration="12" data-track-index="0" data-width="1920" data-height="1080"></div>
+  <div id="s05-host" data-composition-id="s05-data" data-composition-src="compositions/s05-data.html"
+       data-start="26" data-duration="7" data-track-index="0" data-width="1920" data-height="1080"></div>
+  <div id="s06-host" data-composition-id="s06-verdict" data-composition-src="compositions/s06-verdict.html"
+       data-start="33" data-duration="5" data-track-index="0" data-width="1920" data-height="1080"></div>
+  <div id="s07-host" data-composition-id="s07-end" data-composition-src="compositions/s07-end.html"
+       data-start="38" data-duration="5" data-track-index="0" data-width="1920" data-height="1080"></div>
+
+  <div id="subs-host" data-composition-id="subs" data-composition-src="compositions/subtitles.html"
+       data-start="0" data-duration="43" data-track-index="8" data-track-kind="captions"
+       data-width="1920" data-height="1080"></div>
+
+
+  <audio id="sfx-1" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="3.94" data-duration="0.4" data-volume="0.22" data-track-index="2"></audio>
+  <audio id="sfx-2" class="clip" src="assets/sfx/pop.mp3" data-start="4.2" data-duration="0.5" data-volume="0.2" data-track-index="3"></audio>
+  <audio id="sfx-3" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="10.94" data-duration="0.4" data-volume="0.22" data-track-index="2"></audio>
+  <audio id="sfx-4" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="13.94" data-duration="0.4" data-volume="0.22" data-track-index="2"></audio>
+  <audio id="sfx-5" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="25.94" data-duration="0.4" data-volume="0.22" data-track-index="2"></audio>
+  <audio id="sfx-6" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="32.94" data-duration="0.4" data-volume="0.22" data-track-index="2"></audio>
+  <audio id="sfx-7" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="37.94" data-duration="0.4" data-volume="0.22" data-track-index="2"></audio>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

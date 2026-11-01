@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<style>
+  #root { position: absolute; inset: 0; overflow: hidden;
+    background: radial-gradient(65% 60% at 50% 40%, var(--deck-bg-hi) 0%, var(--deck-bg) 62%, var(--deck-bg-lo) 100%);
+    color: var(--deck-ink); font-family: var(--font-cn); }
+  .line1 { position: absolute; left: 0; right: 0; top: 300px; text-align: center; font-size: 96px; font-weight: 900; }
+  .line1 em { font-style: normal; color: var(--mt-gold); }
+  .line2 { position: absolute; left: 0; right: 0; top: 440px; text-align: center; font-size: 46px;
+    font-weight: 500; color: var(--deck-body); }
+  .rule { position: absolute; left: 810px; top: 560px; width: 300px; height: 2px; background: var(--deck-line);
+    transform-origin: 50% 50%; }
+  .next { position: absolute; left: 0; right: 0; top: 610px; text-align: center; font-size: 34px; color: var(--deck-mute); }
+  .next b { color: var(--mt-gold); font-weight: 700; }
+  .disc { position: absolute; left: 0; right: 0; bottom: 170px; text-align: center; font-size: 28px;
+    color: var(--deck-faint); letter-spacing: .02em; }
+</style>
+<div id="root" data-composition-id="s07-end" data-duration="5" data-width="1920" data-height="1080">
+  <div class="wm" data-layout-ignore>投研笔记</div>
+  <h2 class="line1" id="s07-l1">低 PE 不是理由，<em>会算才是</em></h2>
+  <p class="line2" id="s07-l2">下期拆「现金流」，把利润表补完</p>
+  <div class="rule" id="s07-rule"></div>
+  <div class="next" id="s07-next">NEXT / <b>02 现金流陷阱</b></div>
+  <div class="disc" id="s07-disc">科普内容，不构成投资建议 · 数字均为示意图</div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#s07-l1", { opacity: .001, y: 30 }, { opacity: 1, y: 0, duration: .34, ease: "expo.out" }, 0);
+tl.fromTo("#s07-l2", { opacity: .001, y: 20 }, { opacity: 1, y: 0, duration: .3, ease: "power3.out" }, .16);
+tl.fromTo("#s07-rule", { scaleX: 0 }, { scaleX: 1, duration: .34, ease: "power3.inOut" }, .3);
+tl.fromTo("#s07-next", { opacity: .001 }, { opacity: 1, duration: .28 }, .42);
+tl.fromTo("#s07-disc", { opacity: .001 }, { opacity: 1, duration: .3 }, .3);
+window.__timelines["s07-end"] = tl;
+</script>
+</template>
+</body></html>

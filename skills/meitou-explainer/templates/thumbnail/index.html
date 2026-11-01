@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1280, height=720" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-VF.woff2") format("woff2"); font-weight: 100 900; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1280px; height: 720px; overflow: hidden; background: #0C1016; }
+  #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Noto Sans SC", sans-serif; }
+  .hero { position: absolute; inset: 0;
+    background:
+      radial-gradient(60% 70% at 28% 80%, rgba(245,176,46,.34) 0%, rgba(245,176,46,0) 62%),
+      radial-gradient(55% 60% at 80% 26%, rgba(53,196,107,.20) 0%, rgba(53,196,107,0) 64%),
+      linear-gradient(160deg, #17222D 0%, #0C1016 72%); }
+  .band { position: absolute; left: 0; top: 90px; width: 1010px; height: 150px; background: #000; }
+  .title { position: absolute; left: 150px; top: 104px; font-size: 92px; font-weight: 900; color: #fff;
+           letter-spacing: -.01em; white-space: nowrap; }
+  .title em { font-style: normal; color: #FFD400; }
+  .title i { font-style: normal; color: #35C46B; }
+  .badge { position: absolute; left: 30px; top: 22px; width: 104px; height: 104px; border-radius: 50%;
+           background: #2E7D32; display: grid; place-items: center; font-size: 52px; font-weight: 900; color: #fff; }
+  .badge::after { content: ""; position: absolute; left: 66px; top: 66px; width: 34px; height: 24px;
+           background: #E5342A; border-radius: 6px; }
+  .chart { position: absolute; right: 40px; bottom: 34px; width: 520px; height: 300px; }
+  .src { position: absolute; left: 44px; bottom: 30px; font-size: 28px; color: rgba(255,255,255,.72); letter-spacing: .04em; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="thumb" data-start="0" data-duration="3" data-width="1280" data-height="720">
+  <div class="hero"></div>
+  <div class="band"></div>
+  <div class="title">PE 低，<em>就是便宜</em>？</div>
+  <div class="badge">投</div>
+  <svg class="chart" viewBox="0 0 520 300" fill="none">
+    <path d="M20 250 L110 214 L200 232 L290 150 L380 104 L470 132" stroke="#FFD400" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="470" cy="132" r="11" fill="#FFD400"/>
+  </svg>
+  <div class="src">示意 / 非真实标的</div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#root", { scale: 1 }, { scale: 1.004, duration: 3, ease: "none" }, 0);
+window.__timelines["thumb"] = tl;
+</script>
+</body>
+</html>

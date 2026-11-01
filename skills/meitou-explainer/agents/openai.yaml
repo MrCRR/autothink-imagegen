@@ -1,0 +1,4 @@
+interface:
+  display_name: "MeiTou Explainer"
+  short_description: "美投君式中文财经讲解：深色幻灯片 + 手绘白板 + 口播字幕"
+  default_prompt: "用美投讲美股风格做一条财经讲解视频，先给我 45 秒风格样片。"

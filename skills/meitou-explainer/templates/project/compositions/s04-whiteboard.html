@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<style>
+  #root { position: absolute; inset: 0; overflow: hidden; background: var(--paper); color: var(--ink);
+    font-family: var(--font-hand); }
+  .grain { position: absolute; inset: 0; opacity: .55;
+    background-image: radial-gradient(rgba(0,0,0,.05) 1px, transparent 1px); background-size: 4px 4px; }
+  .vig { position: absolute; inset: 0; background: radial-gradient(80% 75% at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,.07) 100%); }
+  .sec { position: absolute; left: 96px; top: 92px; font-size: 44px; color: var(--mark-red); }
+  .formula { position: absolute; left: 118px; top: 322px; font-size: 104px; letter-spacing: .02em; line-height: 1.4; white-space: nowrap; }
+  .formula .v { color: var(--mark-blue); }
+  .formula .op { color: var(--ink); margin: 0 .12em; }
+  .formula .hi { color: var(--mark-red); }
+  .note { position: absolute; left: 126px; top: 588px; font-size: 66px; color: var(--ink); }
+  .note em { font-style: normal; color: var(--mark-red); }
+  .note2 { position: absolute; left: 130px; top: 690px; font-size: 42px; color: var(--paper-ink-soft); }
+  .stamp { position: absolute; right: 140px; top: 640px; font-size: 54px; color: var(--mark-red);
+    border: 5px solid var(--mark-red); border-radius: 8px; padding: 8px 24px; }
+  .pen { position: absolute; left: 0; top: 0; width: 280px; height: 86px; z-index: 5; }
+</style>
+<div id="root" data-composition-id="s04-whiteboard" data-duration="12" data-width="1920" data-height="1080">
+  <div class="wm on-paper" data-layout-ignore>投研笔记</div>
+  <div class="grain"></div><div class="vig"></div>
+  <div class="sec" id="s04-sec">01 / 分母陷阱</div>
+
+  <div class="formula" id="s04-f1"><span class="v">PE</span><span class="op">=</span>市值<span class="op">÷</span><span class="hi" id="s04-den">净利润</span></div>
+
+  <svg style="position:absolute; left:575px; top:338px;" width="400" height="160" viewBox="0 0 400 160" fill="none">
+    <path id="s04-circle-path"
+          d="M200 10 C302 6 392 32 394 70 C396 110 302 144 200 144 C98 144 6 110 8 70 C10 30 98 14 200 10"
+          stroke="#D8352A" stroke-width="6" stroke-linecap="round"/>
+  </svg>
+
+  <p class="note" id="s04-note">分母 <em>变小</em>，PE 反而变高</p>
+  <p class="note2" id="s04-note2">一次性收益、卖资产、会计调整，都会让分母失真</p>
+  <div class="stamp" id="s04-stamp">先看分母</div>
+
+  <svg class="pen" id="s04-pen" viewBox="0 0 280 86">
+    <rect x="0" y="16" width="188" height="54" rx="14" fill="var(--pen-body)"/>
+    <rect x="18" y="28" width="104" height="10" rx="5" fill="var(--pen-metal)"/>
+    <rect x="176" y="20" width="74" height="46" rx="8" fill="var(--pen-grip)"/>
+    <polygon points="248,20 248,66 282,43" fill="#D8352A"/>
+  </svg>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#s04-sec", { opacity: .001, y: -10 }, { opacity: 1, y: 0, duration: .28 }, 0);
+tl.fromTo("#s04-f1 > span", { opacity: .001 }, { opacity: 1, duration: .16, stagger: .12 }, .18);
+tl.fromTo("#s04-pen", { opacity: .001, x: 330, y: 262, rotation: -16 }, { opacity: 1, x: 380, y: 262, duration: .3, ease: "power2.out" }, .9);
+tl.to("#s04-pen", { x: 700, duration: .78, ease: "power1.inOut" }, 1.2);
+tl.fromTo("#s04-circle-path", { strokeDasharray: 1400, strokeDashoffset: 1400 },
+  { strokeDashoffset: 0, duration: .78, ease: "power1.inOut" }, 1.2);
+tl.to("#s04-pen", { opacity: 0, duration: .2 }, 1.98);
+tl.fromTo("#s04-note", { opacity: .001, y: 16 }, { opacity: 1, y: 0, duration: .28, ease: "power2.out" }, 2.1);
+tl.fromTo("#s04-note2", { opacity: .001 }, { opacity: 1, duration: .3 }, 2.6);
+tl.fromTo("#s04-stamp", { opacity: .001, scale: 1.35, rotation: -8 }, { opacity: 1, scale: 1, rotation: -3, duration: .26, ease: "expo.out" }, 3.2);
+tl.fromTo("#root", { scale: 1 }, { scale: 1.015, duration: 12, ease: "none" }, 0);
+window.__timelines["s04-whiteboard"] = tl;
+</script>
+</template>
+</body></html>
