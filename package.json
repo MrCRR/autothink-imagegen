@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "validate": "python3 /Users/cero/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/autothink-imagegen"
+    "validate": "python3 /Users/cero/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/autothink-imagegen",
+    "validate:mediastorm": "python3 /Users/cero/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/mediastorm-explainer"
   }
 }

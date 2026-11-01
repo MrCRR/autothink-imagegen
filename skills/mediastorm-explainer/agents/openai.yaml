@@ -1,0 +1,4 @@
+interface:
+  display_name: "MediaStorm Explainer"
+  short_description: "影视飓风式中文讲解视频：脚本、卡片、音效、成片"
+  default_prompt: "用影视飓风风格做一条讲解视频，先给我 30 秒风格样片。"

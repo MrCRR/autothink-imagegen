@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<style>
+  #root { position: absolute; inset: 0; overflow: hidden; background: var(--ms-paper);
+          color: var(--ms-ink); font-family: var(--ms-font-cn), sans-serif; }
+  .half { position: absolute; top: 0; bottom: 0; width: 50%; overflow: hidden; }
+  .left { left: 0; background: linear-gradient(160deg, var(--ms-press) 0%, #0A0C0F 72%); }
+  .right { right: 0; background: linear-gradient(200deg, var(--ms-press-warm) 0%, #0A0C0F 72%); }
+  .head { position: absolute; top: 116px; font-size: 36px; font-weight: 900; letter-spacing: .04em; }
+  .left .head { left: 112px; color: var(--ms-amber); }
+  .right .head { left: 96px; color: var(--ms-cyan); }
+  .head small { display: block; margin-top: 14px; font-size: 28px; font-weight: 500;
+                color: var(--ms-mute); letter-spacing: .06em; }
+  .panel { position: absolute; top: 282px; width: 500px; height: 500px; }
+  .left .panel { left: 112px; }
+  .right .panel { left: 96px; }
+  .gridbox { position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.36); }
+  .grid { position: absolute; inset: 0;
+          background-image: linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px); }
+  .left .grid { background-size: 25px 25px; }
+  .right .grid { background-size: 50px 50px; }
+  .unit { position: absolute; top: 812px; font-size: 30px; font-weight: 500; color: var(--ms-mute); letter-spacing: .04em; }
+  .left .unit { left: 112px; }
+  .right .unit { left: 96px; }
+  .divider { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--ms-line); }
+  .vs { position: absolute; left: 50%; top: 480px; width: 96px; height: 96px; margin-left: -48px; border-radius: 50%;
+        background: var(--ms-paper); border: 1px solid rgba(255,255,255,.3); display: grid; place-items: center;
+        font-family: var(--ms-font-num), sans-serif; font-size: 32px; font-weight: 700; letter-spacing: .1em; }
+  .callout { position: absolute; left: 112px; right: 112px; bottom: 118px; }
+  .callout .line { height: 3px; background: var(--ms-red); transform-origin: 0 50%; }
+  .callout .txt { margin-top: 22px; font-size: 46px; font-weight: 900; letter-spacing: -.01em; }
+  .callout .txt em { font-style: normal; color: var(--ms-red); }
+  .src { position: absolute; left: 112px; bottom: 56px; font-size: 28px; color: var(--ms-mute); letter-spacing: .03em; }
+</style>
+<div id="root" data-composition-id="s05-compare" data-duration="6.5" data-width="1920" data-height="1080">
+  <div class="half left" id="s05-left">
+    <div class="head" id="s05-h1">手机 · 4K<small>40 MP / 单像素 1.0 µm²</small></div>
+    <div class="panel" id="s05-p1"><div class="gridbox"></div><div class="grid" id="s05-g1"></div></div>
+    <div class="unit">2 × 2 个像素 = 相机 1 个像素</div>
+  </div>
+  <div class="half right" id="s05-right">
+    <div class="head" id="s05-h2">相机 · 1080P<small>8 MP / 单像素 4.0 µm²</small></div>
+    <div class="panel" id="s05-p2"><div class="gridbox"></div><div class="grid" id="s05-g2"></div></div>
+    <div class="unit">同样一块面积，只放得下 1 个像素</div>
+  </div>
+  <div class="divider" id="s05-div"></div>
+  <div class="vs" id="s05-vs">VS</div>
+  <div class="callout" id="s05-callout">
+    <div class="line" id="s05-line"></div>
+    <div class="txt" id="s05-txt">同一个像素，<em>抓到的光差 4 倍</em></div>
+  </div>
+  <div class="src" id="s05-src">示意图 / 像素密度与单像素进光量</div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#s05-left", { opacity: .001, x: -60 }, { opacity: 1, x: 0, duration: .3, ease: "power3.out" }, 0);
+tl.fromTo("#s05-right", { opacity: .001, x: 60 }, { opacity: 1, x: 0, duration: .3, ease: "power3.out" }, .05);
+tl.fromTo(["#s05-h1", "#s05-h2"], { opacity: .001, y: 16 }, { opacity: 1, y: 0, duration: .24, stagger: .07 }, .1);
+tl.fromTo("#s05-p1", { opacity: .001, scale: .94 }, { opacity: 1, scale: 1, duration: .3, ease: "power3.out" }, .2);
+tl.fromTo("#s05-p2", { opacity: .001, scale: .94 }, { opacity: 1, scale: 1, duration: .3, ease: "power3.out" }, .28);
+tl.fromTo(["#s05-g1", "#s05-g2"], { scale: 1 }, { scale: 1.07, duration: 6.5, ease: "none" }, .2);
+tl.fromTo("#s05-div", { scaleY: 0 }, { scaleY: 1, duration: .38, ease: "power4.inOut" }, .06);
+tl.fromTo("#s05-vs", { opacity: .001, scale: .7 }, { opacity: 1, scale: 1, duration: .28, ease: "back.out(1.6)" }, .38);
+tl.fromTo(".unit", { opacity: .001, y: 12 }, { opacity: 1, y: 0, duration: .24, stagger: .1 }, .56);
+tl.fromTo("#s05-line", { scaleX: 0 }, { scaleX: 1, duration: .42, ease: "power4.inOut" }, .62);
+tl.fromTo("#s05-txt", { opacity: .001, y: 18 }, { opacity: 1, y: 0, duration: .28, ease: "power3.out" }, .8);
+tl.fromTo("#s05-src", { opacity: .001 }, { opacity: 1, duration: .24 }, 1);
+window.__timelines["s05-compare"] = tl;
+</script>
+</template>
+</body>
+</html>

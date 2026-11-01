@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<style>
+  #root {
+    position: absolute; inset: 0; overflow: hidden;
+    background: radial-gradient(80% 70% at 50% 112%, rgba(255,176,32,.13) 0%, rgba(255,176,32,0) 62%), var(--ms-paper);
+    color: var(--ms-ink); font-family: var(--ms-font-cn), sans-serif;
+  }
+  .brand { position: absolute; left: 112px; top: 118px; font-family: var(--ms-font-num), sans-serif;
+           font-size: 28px; letter-spacing: .34em; color: var(--ms-mute); }
+  .brand i { font-style: normal; color: var(--ms-amber); }
+  .l1 { position: absolute; left: 106px; top: 292px; font-size: 136px; font-weight: 900;
+        letter-spacing: -.045em; line-height: 1.1; }
+  .l2 { position: absolute; left: 106px; top: 452px; font-size: 136px; font-weight: 900;
+        letter-spacing: -.045em; line-height: 1.1; color: var(--ms-dim); }
+  .l1 em { font-style: normal; color: var(--ms-amber); }
+  .rule { position: absolute; left: 112px; top: 664px; height: 6px; width: 460px; background: var(--ms-amber);
+          transform-origin: 0 50%; }
+  .cta { position: absolute; left: 112px; top: 712px; font-size: 42px; font-weight: 900; letter-spacing: .02em; }
+  .cta span { color: var(--ms-amber); margin: 0 .46em; }
+  .ep { position: absolute; right: 112px; bottom: 58px; font-family: var(--ms-font-num), sans-serif;
+        font-size: 28px; letter-spacing: .2em; color: var(--ms-mute); }
+</style>
+<div id="root" data-composition-id="s06-outro" data-duration="5" data-width="1920" data-height="1080">
+  <div class="brand" id="s06-brand">MEDIA STORM STYLE <i>/ EP.01</i></div>
+  <h2 class="l1" id="s06-l1">决定画质的，是 <em>进光量</em></h2>
+  <h2 class="l2" id="s06-l2">不是分辨率。</h2>
+  <div class="rule" id="s06-rule"></div>
+  <div class="cta" id="s06-cta">点赞<span>·</span>投币<span>·</span>收藏</div>
+  <div class="ep" id="s06-ep">NEXT / 02 进光量</div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#s06-brand", { y: 14 }, { y: 0, duration: .24 }, 0);
+tl.fromTo("#s06-l1", { opacity: .001, y: 44 }, { opacity: 1, y: 0, duration: .32, ease: "expo.out" }, .02);
+tl.fromTo("#s06-l2", { opacity: .001, y: 44 }, { opacity: 1, y: 0, duration: .32, ease: "expo.out" }, .16);
+tl.fromTo("#s06-rule", { scaleX: 0 }, { scaleX: 1, duration: .38, ease: "power4.inOut" }, .36);
+tl.fromTo("#s06-cta", { opacity: .001, y: 16 }, { opacity: 1, y: 0, duration: .24 }, .5);
+tl.fromTo("#s06-ep", { opacity: .001 }, { opacity: 1, duration: .22 }, .62);
+tl.fromTo("#root", { scale: 1 }, { scale: 1.02, duration: 5, ease: "none" }, 0);
+window.__timelines["s06-outro"] = tl;
+</script>
+</template>
+</body>
+</html>

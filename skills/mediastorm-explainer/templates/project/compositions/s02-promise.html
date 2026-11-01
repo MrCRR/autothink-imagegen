@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<style>
+  #root {
+    position: absolute; inset: 0; overflow: hidden;
+    background: radial-gradient(70% 60% at 95% 0%, rgba(56,225,255,.08) 0%, rgba(56,225,255,0) 60%), var(--ms-paper);
+    color: var(--ms-ink); font-family: var(--ms-font-cn), sans-serif;
+  }
+  .kicker { position: absolute; left: 112px; top: 126px; font-family: var(--ms-font-num), sans-serif;
+            font-size: 30px; letter-spacing: .3em; color: var(--ms-amber); }
+  .kicker span { color: var(--ms-mute); }
+  .title { position: absolute; left: 106px; top: 206px; font-size: 128px; font-weight: 900;
+           letter-spacing: -.04em; line-height: 1.04; }
+  .title em { font-style: normal; color: var(--ms-amber); }
+  .rows { position: absolute; left: 112px; right: 112px; top: 452px; }
+  .row { position: relative; height: 150px; border-top: 1px solid var(--ms-line); }
+  .row:last-child { border-bottom: 1px solid var(--ms-line); }
+  .num { position: absolute; left: 0; top: 40px; font-family: var(--ms-font-num), sans-serif; font-size: 56px;
+         font-weight: 500; color: var(--ms-amber); letter-spacing: .04em; }
+  .label { position: absolute; left: 130px; top: 28px; font-size: 66px; font-weight: 900; letter-spacing: -.02em; }
+  .value { position: absolute; right: 0; top: 44px; font-size: 40px; font-weight: 500; color: var(--ms-quiet); }
+  .value b { color: var(--ms-cyan); font-weight: 900; }
+</style>
+<div id="root" data-composition-id="s02-promise" data-duration="4" data-width="1920" data-height="1080">
+  <div class="kicker" id="s02-kicker">THIS VIDEO <span>/ 3 个实验</span></div>
+  <h2 class="title" id="s02-title">像素，<em>不等于</em>画质</h2>
+  <div class="rows" id="s02-rows">
+    <div class="row" id="s02-r1"><div class="num">01</div><div class="label">单像素面积</div><div class="value">手机只有 <b>1/4</b></div></div>
+    <div class="row" id="s02-r2"><div class="num">02</div><div class="label">进光量</div><div class="value">相差 <b>4 倍</b></div></div>
+    <div class="row" id="s02-r3"><div class="num">03</div><div class="label">算法补偿</div><div class="value">补不回 <b>动态范围</b></div></div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#s02-kicker", { y: 16 }, { y: 0, duration: .24, ease: "power3.out" }, 0);
+tl.fromTo("#s02-title", { opacity: .001, y: 40 }, { opacity: 1, y: 0, duration: .34, ease: "expo.out" }, .04);
+["#s02-r1", "#s02-r2", "#s02-r3"].forEach((sel, i) => {
+  tl.fromTo(sel, { opacity: .001, x: -40 }, { opacity: 1, x: 0, duration: .3, ease: "power3.out" }, .44 + i * .22);
+});
+tl.fromTo("#s02-rows .value", { opacity: .001 }, { opacity: 1, duration: .2, stagger: .22 }, .56);
+tl.fromTo("#root", { scale: 1 }, { scale: 1.02, duration: 4, ease: "none" }, 0);
+window.__timelines["s02-promise"] = tl;
+</script>
+</template>
+</body>
+</html>

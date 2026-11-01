@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<style>
+  #root {
+    position: absolute; inset: 0; overflow: hidden;
+    background: radial-gradient(46% 90% at 100% 40%, rgba(255,176,32,.13) 0%, rgba(255,176,32,0) 62%), var(--ms-paper);
+    color: var(--ms-ink); font-family: var(--ms-font-cn), sans-serif;
+  }
+  .ghost { position: absolute; right: -40px; top: 64px; font-family: var(--ms-font-num), sans-serif;
+           font-size: 820px; font-weight: 700; line-height: .9; color: transparent;
+           -webkit-text-stroke: 3px rgba(255,255,255,.14); }
+  .kicker { position: absolute; left: 112px; top: 340px; font-family: var(--ms-font-num), sans-serif;
+            font-size: 30px; letter-spacing: .34em; color: var(--ms-amber); }
+  .kicker span { color: var(--ms-mute); }
+  .title { position: absolute; left: 106px; top: 412px; font-size: 168px; font-weight: 900;
+           letter-spacing: -.045em; line-height: 1.06; }
+  .rule { position: absolute; left: 112px; top: 686px; height: 8px; width: 760px; background: var(--ms-amber);
+          transform-origin: 0 50%; }
+  .note { position: absolute; left: 112px; top: 740px; font-size: 40px; font-weight: 500; color: var(--ms-quiet); }
+  .flash { position: absolute; inset: 0; background: var(--ms-flash); pointer-events: none; }
+</style>
+<div id="root" data-composition-id="s03-chapter" data-duration="3.5" data-width="1920" data-height="1080">
+  <div class="flash" id="s03-flash"></div>
+  <div class="ghost" id="s03-ghost" data-layout-allow-overflow>01</div>
+  <div class="kicker" id="s03-kicker">CHAPTER ONE <span>/ 实验</span></div>
+  <h2 class="title" id="s03-title">像素不是画质</h2>
+  <div class="rule" id="s03-rule"></div>
+  <p class="note" id="s03-note">先看一个数字：单个像素有多大</p>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#s03-flash", { opacity: .5 }, { opacity: 0, duration: .16, ease: "power2.in" }, 0);
+tl.fromTo("#s03-ghost", { opacity: .001, x: 140 }, { opacity: 1, x: 0, duration: .52, ease: "expo.out" }, 0);
+tl.fromTo("#s03-kicker", { opacity: .001, y: 14 }, { opacity: 1, y: 0, duration: .2 }, .06);
+tl.fromTo("#s03-title", { opacity: .001, x: -56 }, { opacity: 1, x: 0, duration: .34, ease: "expo.out" }, .1);
+tl.fromTo("#s03-rule", { scaleX: 0 }, { scaleX: 1, duration: .38, ease: "power4.inOut" }, .26);
+tl.fromTo("#s03-note", { opacity: .001 }, { opacity: 1, duration: .22 }, .36);
+window.__timelines["s03-chapter"] = tl;
+</script>
+</template>
+</body>
+</html>
