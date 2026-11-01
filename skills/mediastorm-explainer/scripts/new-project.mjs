@@ -99,13 +99,16 @@ async function main() {
     createdAt: new Date().toISOString(),
   }, null, 2)}\n`);
 
-  let indexHasDuration = true;
   const indexPath = path.join(target, "index.html");
   const index = await readFile(indexPath, "utf8");
-  if (opts.duration && /data-duration="\d+(\.\d+)?"/.test(index)) {
-    indexHasDuration = true;
-    await writeFile(indexPath, index.replace(/(data-composition-id="main"[^>]*data-duration=")\d+(\.\d+)?(")/, `$1${opts.duration}$3`));
+  const durationPattern = /(data-composition-id="main"[^>]*data-duration=")\d+(?:\.\d+)?(")/;
+  const indexHasDuration = durationPattern.test(index);
+  if (indexHasDuration) {
+    await writeFile(indexPath, index.replace(durationPattern, `$1${opts.duration}$2`));
   }
+  const lastSceneEnd = Math.max(...[...index.matchAll(/data-start="([\d.]+)"\s+data-duration="([\d.]+)"/g)]
+    .map((m) => Number(m[1]) + Number(m[2])));
+  const scenesOutrun = opts.duration < lastSceneEnd;
 
   await writeFile(path.join(target, "SCRIPT.md"), SCRIPT_TEMPLATE(opts.title || name));
 
@@ -118,6 +121,7 @@ async function main() {
   console.log(`   assets/sfx/         whoosh / impact / click (Pixabay, no attribution required)`);
   console.log(`   SCRIPT.md           beat sheet to fill in before touching HTML`);
   if (!indexHasDuration) console.log("   ! root data-duration not found — set it in index.html");
+  if (scenesOutrun) console.log(`   ! scene hosts still end at ${lastSceneEnd}s — retime them in index.html, or they are cut at ${opts.duration}s`);
   console.log("");
   console.log("Next:");
   console.log(`   cd ${path.relative(process.cwd(), target) || "."}`);

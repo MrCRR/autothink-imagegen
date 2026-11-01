@@ -38,11 +38,12 @@ function parseArgs(argv) {
   return opts;
 }
 
-/** GB2312 symbol rows + level-1 hanzi, decoded with the runtime's own gbk decoder. */
-function gb2312Level1() {
+/** GB2312 symbol rows + hanzi, decoded with the runtime's own gbk decoder. */
+function gb2312(full) {
   const decoder = new TextDecoder("gbk");
   const chars = [];
-  for (let hi = 0xa1; hi <= 0xd7; hi += 1) {
+  const lastHighByte = full ? 0xf7 : 0xd7;
+  for (let hi = 0xa1; hi <= lastHighByte; hi += 1) {
     for (let lo = 0xa1; lo <= 0xfe; lo += 1) {
       const ch = decoder.decode(new Uint8Array([hi, lo]));
       if (ch !== "\ufffd" && ch.length === 1) chars.push(ch);
@@ -109,7 +110,7 @@ async function main() {
 
   const charset = new Set([
     ...asciiChars(),
-    ...(opts.full ? gb2312Level1() : gb2312Level1()),
+    ...gb2312(opts.full),
     ...EXTRA_SYMBOLS,
     ...(await projectText(dir)),
     ...(opts.textFile ? await readFile(opts.textFile, "utf8") : ""),

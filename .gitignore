@@ -6,3 +6,4 @@ coverage/
 .worktrees/
 skills/autothink-imagegen/config.json
 skills/autothink-imagegen/output/
+skills/mediastorm-explainer/.sample-render.mp4
