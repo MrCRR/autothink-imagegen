@@ -1,6 +1,6 @@
 {
   "api_key": "replace-with-your-autothink-image-key",
   "base_url": "https://ai.autothink.space/v1",
-  "model": "gpt-image-2",
+  "model": "gpt-image-2.5-flare",
   "proxy": ""
 }

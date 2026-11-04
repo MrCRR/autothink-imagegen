@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { createMockImageServer } from "./mock-image-api.mjs";
@@ -32,6 +33,29 @@ test("python fallback sends a generation request and saves the PNG", async () =>
     ], { AUTOTHINK_IMAGEGEN_CONFIG: fixture.configPath });
     assert.equal(result.code, 0, result.stderr);
     assert.match(result.stdout, /^SAVED: .*python\.png\n$/);
+    assertMockHealthy(server);
+  } finally {
+    await fixture.cleanup();
+    await server.close();
+  }
+});
+
+test("python fallback uses the bundled default model when none is configured", async () => {
+  const server = await createMockImageServer(async ({ request, json, png }) => {
+    assert.equal(JSON.parse(request.body).model, "gpt-image-2.5-flare");
+    json({ data: [{ b64_json: png.toString("base64") }] });
+  });
+  const fixture = await makeFixture(server.baseUrl);
+  await writeFile(fixture.configPath, JSON.stringify({
+    api_key: "test-only-key",
+    base_url: server.baseUrl,
+    proxy: ""
+  }));
+  try {
+    const result = await runCommand("python3", [
+      pythonCli, "--prompt", "default model", "--out", path.join(fixture.directory, "default.png")
+    ], { AUTOTHINK_IMAGEGEN_CONFIG: fixture.configPath });
+    assert.equal(result.code, 0, result.stderr);
     assertMockHealthy(server);
   } finally {
     await fixture.cleanup();

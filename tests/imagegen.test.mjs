@@ -35,7 +35,7 @@ test("generation sends the exact prompt and saves a base64 PNG", async () => {
     assert.equal(request.headers.authorization, "Bearer test-only-key");
     const payload = JSON.parse(request.body);
     assert.deepEqual(payload, {
-      model: "gpt-image-2",
+      model: "gpt-image-2.5-flare",
       prompt: " draw a tree ",
       quality: "auto",
       size: "1024x1024",
@@ -54,6 +54,29 @@ test("generation sends the exact prompt and saves a base64 PNG", async () => {
     assert.match(result.stdout, /^SAVED: .*result\.png\n$/);
     assert.deepEqual(await readBytes(output), PNG_BYTES);
     assert.doesNotMatch(`${result.stdout}\n${result.stderr}`, /test-only-key/);
+    assertMockHealthy(server);
+  } finally {
+    await fixture.cleanup();
+    await server.close();
+  }
+});
+
+test("configuration without a model uses the bundled default model", async () => {
+  const server = await createMockImageServer(async ({ request, json, png }) => {
+    assert.equal(JSON.parse(request.body).model, "gpt-image-2.5-flare");
+    json({ data: [{ b64_json: png.toString("base64") }] });
+  });
+  const fixture = await makeFixture(server.baseUrl);
+  await writeFile(fixture.configPath, JSON.stringify({
+    api_key: "test-only-key",
+    base_url: server.baseUrl,
+    proxy: ""
+  }));
+  try {
+    const result = await runCommand(process.execPath, [nodeCli, "--prompt", "default model"], {
+      AUTOTHINK_IMAGEGEN_CONFIG: fixture.configPath
+    });
+    assert.equal(result.code, 0, result.stderr);
     assertMockHealthy(server);
   } finally {
     await fixture.cleanup();

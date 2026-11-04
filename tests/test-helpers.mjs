@@ -15,7 +15,7 @@ export async function makeFixture(baseUrl) {
   await writeFile(configPath, JSON.stringify({
     api_key: "test-only-key",
     base_url: baseUrl,
-    model: "gpt-image-2",
+    model: "gpt-image-2.5-flare",
     proxy: ""
   }));
   return {
