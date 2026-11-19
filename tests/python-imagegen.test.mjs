@@ -42,7 +42,7 @@ test("python fallback sends a generation request and saves the PNG", async () =>
 
 test("python fallback uses the bundled default model when none is configured", async () => {
   const server = await createMockImageServer(async ({ request, json, png }) => {
-    assert.equal(JSON.parse(request.body).model, "gpt-image-2.5-flare");
+    assert.equal(JSON.parse(request.body).model, "gpt-image-2.6");
     json({ data: [{ b64_json: png.toString("base64") }] });
   });
   const fixture = await makeFixture(server.baseUrl);

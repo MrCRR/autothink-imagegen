@@ -35,7 +35,7 @@ test("generation sends the exact prompt and saves a base64 PNG", async () => {
     assert.equal(request.headers.authorization, "Bearer test-only-key");
     const payload = JSON.parse(request.body);
     assert.deepEqual(payload, {
-      model: "gpt-image-2.5-flare",
+      model: "gpt-image-2.6",
       prompt: " draw a tree ",
       quality: "auto",
       size: "1024x1024",
@@ -63,7 +63,7 @@ test("generation sends the exact prompt and saves a base64 PNG", async () => {
 
 test("configuration without a model uses the bundled default model", async () => {
   const server = await createMockImageServer(async ({ request, json, png }) => {
-    assert.equal(JSON.parse(request.body).model, "gpt-image-2.5-flare");
+    assert.equal(JSON.parse(request.body).model, "gpt-image-2.6");
     json({ data: [{ b64_json: png.toString("base64") }] });
   });
   const fixture = await makeFixture(server.baseUrl);

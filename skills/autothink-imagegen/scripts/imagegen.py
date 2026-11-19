@@ -16,7 +16,7 @@ from pathlib import Path
 
 
 DEFAULT_BASE_URL = "https://ai.autothink.space/v1"
-DEFAULT_MODEL = "gpt-image-2.5-flare"
+DEFAULT_MODEL = "gpt-image-2.6"
 MAX_RESPONSE_BYTES = 64 * 1024 * 1024
 MAX_INPUT_BYTES = 64 * 1024 * 1024
 MAX_REDIRECTS = 5

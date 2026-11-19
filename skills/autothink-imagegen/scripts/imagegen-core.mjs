@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import { connect as tlsConnect } from "node:tls";
 
 const DEFAULT_BASE_URL = "https://ai.autothink.space/v1";
-const DEFAULT_MODEL = "gpt-image-2.5-flare";
+const DEFAULT_MODEL = "gpt-image-2.6";
 const MAX_RESPONSE_BYTES = 64 * 1024 * 1024;
 const MAX_INPUT_BYTES = 64 * 1024 * 1024;
 const MAX_REDIRECTS = 5;
